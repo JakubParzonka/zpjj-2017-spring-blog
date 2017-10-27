@@ -25,10 +25,6 @@
 	</properties>
 
 	<dependencies>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-data-mongodb</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -37,17 +33,36 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--Mongo-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.data</groupId>-->
+			<!--<artifactId>spring-data-mongodb</artifactId>-->
+			<!--<version>1.10.7.RELEASE</version>-->
+		<!--</dependency>-->
 		<dependency>
-			<groupId>de.flapdoodle.embed</groupId>
-			<artifactId>de.flapdoodle.embed.mongo</artifactId>
-			<scope>test</scope>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.4.2</version>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>de.flapdoodle.embed</groupId>-->
+			<!--<artifactId>de.flapdoodle.embed.mongo</artifactId>-->
+			<!--<version>2.0.0</version>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>cz.jirutka.spring</groupId>-->
+			<!--<artifactId>embedmongo-spring</artifactId>-->
+			<!--<version>RELEASE</version>-->
+		<!--</dependency>-->
 		<!-- hot swapping, disable cache for template, enable live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,17 +70,17 @@
 			<optional>true</optional>
 		</dependency>
 		<!--SL4J-->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.19</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.5</version>
-		</dependency>
-		<!--Log4J 2-->
+		<!--<dependency>-->
+			<!--<groupId>org.slf4j</groupId>-->
+			<!--<artifactId>slf4j-api</artifactId>-->
+			<!--<version>1.7.19</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.logging.log4j</groupId>-->
+			<!--<artifactId>log4j-slf4j-impl</artifactId>-->
+			<!--<version>2.5</version>-->
+		<!--</dependency>-->
+		<!--&lt;!&ndash;Log4J 2&ndash;&gt;
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
@@ -80,7 +95,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>2.5</version>
-		</dependency>
+		</dependency>-->
 <!--Don't use this now. Maybe later.-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
@@ -99,6 +114,19 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
 		</dependency>
+		<dependency>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+
 
 	</dependencies>
 

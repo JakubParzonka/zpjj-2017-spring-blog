@@ -1,4 +1,4 @@
-package edu.wat.pl.blog.post;
+package edu.wat.pl.blog.post.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;

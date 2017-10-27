@@ -1,4 +1,4 @@
-package edu.wat.pl.blog;
+package edu.wat.pl.blog.main_page.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 @Controller
-public class WelcomeController {
+public class MainPageController {
 
     // inject via application.properties
     @Value("${welcome.message:test}")
@@ -16,7 +16,7 @@ public class WelcomeController {
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
         model.put("message", this.message);
-        return "welcome";
+        return "mainPage";
     }
 
 }
