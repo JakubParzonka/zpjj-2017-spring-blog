@@ -9,4 +9,7 @@ public interface PostRepository extends MongoRepository<Post, String>/*, QueryDs
 
     List<Post> findPostByTitle(String s);
 
+    List<Post> findPostById(String s);
+
+
 }

@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Blog</a>
+            <a class="navbar-brand" href="/">Blog</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -25,30 +25,18 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
+    <div id="postContainer" th:unless="${specificPost == null}">
 
-    <div class="starter-template">
-        <h1>Spring Boot Web Thymeleaf Example</h1>
-        <h2>
-            <span th:text="'Message: ' + ${message}"></span>
-        </h2>
+        <h1 th:text="${specificPost.title}"></h1>
+        <td th:text="${specificPost.creationDate}"></td>
+        <p th:text="${specificPost.contents}"></p>
+
+
     </div>
-
-    <div id="postContainer" th:unless="${posts == null}">
-
-        <tr th:each="post : ${posts}">
-            <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
-            <td th:text="${post.creationDate}"></td>
-            <td th:text="${post.id}"></td>
-        </tr>
-    </div>
-
 </div>
-<!-- /.container -->
 
 <script type="text/javascript"
         src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </body>
 </html>

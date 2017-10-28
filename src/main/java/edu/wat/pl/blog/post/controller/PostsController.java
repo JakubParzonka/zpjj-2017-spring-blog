@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -21,6 +20,7 @@ public class PostsController {
 
     @Autowired
     private TitlesService titlesService;
+
     @Autowired
     private PostService postService;
 
@@ -29,6 +29,7 @@ public class PostsController {
         logger.info("Post object has been captured: " + post.toString());
         postService.savePost(post);
         titlesService.saveTitle(post);
+        System.out.println(postService.findPostByTitle("Julia dreams").getId());
         return "redirect:/";
     }
 
@@ -39,8 +40,15 @@ public class PostsController {
     }
 
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
-    public String showAllPosts(Model model){
+    public String showAllPosts(Model model) {
         return "posts";
     }
+
+    @GetMapping("/post/{postId}")
+    public String showSpecificPost(Model model, @PathVariable("postId") String id) {
+        model.addAttribute("specificPost", postService.findPostById(id));
+        return "post";
+    }
+
 
 }
