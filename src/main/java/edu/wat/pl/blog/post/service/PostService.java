@@ -1,6 +1,6 @@
 package edu.wat.pl.blog.post.service;
 
-import edu.wat.pl.blog.post.Post;
+import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

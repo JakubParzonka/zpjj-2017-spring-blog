@@ -1,4 +1,4 @@
-package edu.wat.pl.blog.post;
+package edu.wat.pl.blog.post.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;

@@ -1,11 +1,11 @@
 package edu.wat.pl.blog.post.repository;
 
-import edu.wat.pl.blog.post.Post;
+import edu.wat.pl.blog.post.model.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface PostRepository extends MongoRepository<Post, String>/*, QueryDslPredicateExecutor<Post> */ {
+public interface PostRepository extends MongoRepository<Post, String> {
 
     List<Post> findPostByTitle(String s);
 

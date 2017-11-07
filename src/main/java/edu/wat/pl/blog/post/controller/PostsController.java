@@ -1,10 +1,8 @@
 package edu.wat.pl.blog.post.controller;
 
-import edu.wat.pl.blog.post.Post;
+import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.service.PostService;
-import edu.wat.pl.blog.title.TitlesService;
-import edu.wat.pl.blog.title.dto.Titles;
-import edu.wat.pl.blog.title.repository.TitlesRepository;
+import edu.wat.pl.blog.title.service.TitlesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

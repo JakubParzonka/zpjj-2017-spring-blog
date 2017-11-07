@@ -1,4 +1,4 @@
-package edu.wat.pl.blog.main_page.controller;
+package edu.wat.pl.blog;
 
 import edu.wat.pl.blog.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;

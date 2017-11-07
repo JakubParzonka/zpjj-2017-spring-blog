@@ -1,4 +1,4 @@
-package edu.wat.pl.blog.title.dto;
+package edu.wat.pl.blog.title.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

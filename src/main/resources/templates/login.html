@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Blog</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/add_post">New post</a></li>
+                <li><a href="/posts">See all Posts</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<form th:cellpadding="10px" action="#" th:method="POST" th:action="@{/login}" th:id="loginForm">
+    <h2 class="form-heading">Log in</h2>
+
+    <div class="form-group ${error != null ? 'has-error' : ''}">
+        <span>${message}</span>
+        <input type="text" th:id="username" th:field="${user.username}" autofocus="true"/>
+        <input type="password" th:id="password" th:field="${user.password}"/>
+        <span>${error}</span>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        <h4 class="text-center"><a href="registration.html">Create an account</a></h4>
+    </div>
+</form>
+
+
+</body>
+</html>

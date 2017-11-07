@@ -1,7 +1,7 @@
-package edu.wat.pl.blog.title;
+package edu.wat.pl.blog.title.service;
 
-import edu.wat.pl.blog.post.Post;
-import edu.wat.pl.blog.title.dto.Titles;
+import edu.wat.pl.blog.post.model.Post;
+import edu.wat.pl.blog.title.model.Titles;
 import edu.wat.pl.blog.title.repository.TitlesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
