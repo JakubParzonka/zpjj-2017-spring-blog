@@ -24,24 +24,23 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
+        model.addAttribute("user", new User());
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
-        userService.save(userForm);
+        userService.save(user);
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        securityService.autologin(user.getUsername(), user.getPasswordConfirm());
 
-        return "redirect:/";
+        return "redirect:/posts";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
