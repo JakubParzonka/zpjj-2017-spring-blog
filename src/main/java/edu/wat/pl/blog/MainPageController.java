@@ -11,6 +11,8 @@ import java.util.Map;
 @Controller
 public class MainPageController {
 
+//    @Autowired
+//    private SessionInfo session;
 
     @Autowired
     private PostService postService;
@@ -23,6 +25,7 @@ public class MainPageController {
     public String welcome(Map<String, Object> model) {
         model.put("message", this.message);
         model.put("posts", postService.findAllPosts());
+//        model.put("username", ((session.getCurrentUsername() == null) ? "unknown" : session.getCurrentUsername()));
         return "mainPage";
     }
 

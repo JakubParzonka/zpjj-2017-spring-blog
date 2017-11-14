@@ -2,6 +2,7 @@ package edu.wat.pl.blog.post.service;
 
 import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.repository.PostRepository;
+import edu.wat.pl.blog.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public void savePost(Post newPost) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        newPost.setCreationDate(dtf.format(LocalDate.now()));
+        newPost.setCreationDate(TimeUtils.getCurrentTime());
         postRepository.save(newPost);
     }
 

@@ -11,19 +11,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Blog</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/add_post">New post</a></li>
-                <li><a href="/posts">See all Posts</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 
 <form th:cellpadding="10px" action="#" method="POST" th:action="@{/registration}" th:object="${user}"
       id="registrationForm">
@@ -31,20 +19,25 @@
     <h2 class="form-signin-heading">Create your account</h2>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-        <input type="text" th:id="username" th:field="*{username}"/>
+       User name: <input type="text" th:id="username" th:field="*{username}"/>
+
+    </div>
+    <div class="form-group ${error != null ? 'has-error' : ''}">
+        Email: <input type="text" th:id="email" th:field="*{email}"/>
 
     </div>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-        <input type="password" th:id="password" th:field="*{password}"/>
+       Password: <input type="password" th:id="password" th:field="*{password}"/>
     </div>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-        <input type="password" path="passwordConfirm" class="form-control"
+        Confirm: <input type="password" path="passwordConfirm" class="form-control"
                placeholder="Confirm your password"/>
     </div>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 </form>
+<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </body>
 </html>

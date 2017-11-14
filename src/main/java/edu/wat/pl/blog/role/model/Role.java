@@ -12,8 +12,6 @@ public class Role {
     @Id
     private String id;
     private String name;
-    private Set<User> users;
-
 
     public String getId() {
         return id;
@@ -31,11 +29,7 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public Role(String name) {
+        this.name = name;
     }
 }

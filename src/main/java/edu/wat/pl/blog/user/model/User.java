@@ -5,9 +5,6 @@ import edu.wat.pl.blog.role.model.Role;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-import java.util.Set;
-
 @Document(collection = "users")
 public class User {
 
@@ -22,9 +19,9 @@ public class User {
 
     private String email;
 
-    private Date userSignUpDate;
+    private String userSignUpDate;
 
-    private Set<Role> roles;
+    private Role role;
 
     public String getId() {
         return id;
@@ -58,20 +55,20 @@ public class User {
         this.email = email;
     }
 
-    public Date getUserSignUpDate() {
+    public String getUserSignUpDate() {
         return userSignUpDate;
     }
 
-    public void setUserSignUpDate(Date userSignUpDate) {
+    public void setUserSignUpDate(String userSignUpDate) {
         this.userSignUpDate = userSignUpDate;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getPasswordConfirm() {

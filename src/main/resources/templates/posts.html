@@ -11,21 +11,10 @@
           href="../../css/main.css"/>
 </head>
 <body>
-
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Blog</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/add_post">New post</a></li>
-                <li><a href="/posts">See all Posts</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 
 <h1>IN PROGRESS</h1>
+<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+
 </body>
 </html>

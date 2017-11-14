@@ -1,8 +1,8 @@
 package edu.wat.pl.blog.auth.validator;
 
 
-import edu.wat.pl.blog.auth.service.UserService;
 import edu.wat.pl.blog.user.model.User;
+import edu.wat.pl.blog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -11,8 +11,9 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserValidator implements Validator {
+
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -27,7 +28,7 @@ public class UserValidator implements Validator {
         if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-        if (userService.findByUsername(user.getUsername()) != null) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 

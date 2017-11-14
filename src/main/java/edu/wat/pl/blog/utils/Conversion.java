@@ -1,7 +1,6 @@
-package edu.wat.pl.blog.conversion;
+package edu.wat.pl.blog.utils;
 
 import org.springframework.cglib.core.Converter;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
