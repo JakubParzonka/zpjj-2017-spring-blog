@@ -38,9 +38,9 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-        //userValidator.validate(user, bindingResult);
-
+        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(X -> System.err.println(X.toString()));
             return "registration";
         }
 
