@@ -9,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,6 @@ public class PostsController {
         logger.info("Post object has been captured: " + post.toString());
         postService.savePost(post);
         titlesService.saveTitle(post);
-        System.out.println(postService.findPostByTitle("Julia dreams").getId());
         return "redirect:/";
     }
 
@@ -52,7 +54,6 @@ public class PostsController {
             post.setComments(new ArrayList<>());
             post.getComments().add(new Comment("","",""));
         }
-
         model.addAttribute("specificPost", post);
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
         return "post";

@@ -1,4 +1,5 @@
 package edu.wat.pl.blog.user.controller;
+
 import edu.wat.pl.blog.auth.service.SecurityService;
 import edu.wat.pl.blog.user.service.UserService;
 import edu.wat.pl.blog.auth.validator.UserValidator;
@@ -37,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-        userValidator.validate(user, bindingResult);
+        //userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -62,9 +63,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
