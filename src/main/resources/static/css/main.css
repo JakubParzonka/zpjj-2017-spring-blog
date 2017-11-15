@@ -1,8 +1,7 @@
-h1{
-    color:#0000FF;
+a {
+    color: inherit;
 }
 
-h2{
-    color:#FF0000;
+a:hover {
+    color: inherit;
 }
-

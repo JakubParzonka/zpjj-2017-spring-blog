@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
@@ -13,7 +13,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<span th:text="'User name: ' + ${username}"></span>
+<!--<span th:text="'User name: ' + ${username}"></span>-->
 
 
 <div class="container">
@@ -24,21 +24,21 @@
         </h2>
     </div>
 
-    <div id="postContainer" th:unless="${posts == null}">
-
-        <tr th:each="post : ${posts}">
-            <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
-            <td th:text="${post.creationDate}"></td>
-            <td th:text="${post.id}"></td>
-        </tr>
-    </div>
-
+    <span th:each="post : ${posts}">
+        <div class="well">
+            <h2><a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a></h2>
+            <span>Posted on: </span>
+            <span th:text="${post.creationDate}"></span>
+            <hr />
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla enim nunc, sollicitudin sed dolor quis, mattis cursus erat. Pellentesque in arcu eu neque fermentum fringilla. Cras commodo orci leo, consequat suscipit nunc interdum nec. Vestibulum hendrerit mauris diam, eu vulputate ex accumsan ultricies.</p>
+        </div>
+    </span>
 </div>
 <!-- /.container -->
 
 <script type="text/javascript"
         src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+<!--<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>-->
 
 </body>
 </html>
