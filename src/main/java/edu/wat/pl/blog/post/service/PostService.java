@@ -35,5 +35,7 @@ public class PostService {
         return postRepository.findPostById(id).get(0);
     }
 
-
+    public void updatePostWithComment(Post newPost) {
+        newPost.getComments().get(newPost.getComments().size() - 1).setCommentsDate(TimeUtils.getCurrentTime());
+    }
 }

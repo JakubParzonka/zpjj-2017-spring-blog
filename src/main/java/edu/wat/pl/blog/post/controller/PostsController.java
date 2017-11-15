@@ -1,5 +1,6 @@
 package edu.wat.pl.blog.post.controller;
 
+import edu.wat.pl.blog.comment.Comment;
 import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.service.PostService;
 import edu.wat.pl.blog.title.service.TitlesService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @Controller
@@ -44,8 +47,22 @@ public class PostsController {
 
     @GetMapping("/post/{postId}")
     public String showSpecificPost(Model model, @PathVariable("postId") String id) {
-        model.addAttribute("specificPost", postService.findPostById(id));
+        Post post = postService.findPostById(id);
+        if(post.getComments() == null || post.getComments().isEmpty()) {
+            post.setComments(new ArrayList<>());
+            post.getComments().add(new Comment("","",""));
+        }
+
+        model.addAttribute("specificPost", post);
+        model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
         return "post";
+    }
+
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
+    public String addComment(Post post) {
+        logger.info("Post with a comment has been captured: " + post.getComments().toString());
+        postService.updatePostWithComment(post);
+        return "redirect:/";
     }
 
 

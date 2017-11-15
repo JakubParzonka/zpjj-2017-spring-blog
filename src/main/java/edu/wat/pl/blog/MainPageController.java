@@ -1,5 +1,6 @@
 package edu.wat.pl.blog;
 
+//import edu.wat.pl.blog.auth.SessionInfo;
 import edu.wat.pl.blog.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

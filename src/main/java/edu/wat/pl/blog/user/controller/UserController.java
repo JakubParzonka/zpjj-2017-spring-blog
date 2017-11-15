@@ -1,9 +1,8 @@
 package edu.wat.pl.blog.user.controller;
-
 import edu.wat.pl.blog.auth.service.SecurityService;
+import edu.wat.pl.blog.user.service.UserService;
 import edu.wat.pl.blog.auth.validator.UserValidator;
 import edu.wat.pl.blog.user.model.User;
-import edu.wat.pl.blog.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -37,7 +37,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-        //userValidator.validate(user, bindingResult);
+        userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -67,7 +67,7 @@ public class UserController {
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+        return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
 
 }
