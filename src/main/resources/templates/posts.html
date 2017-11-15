@@ -13,8 +13,22 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<h1>IN PROGRESS</h1>
+<div id="postContainer" th:unless="${posts == null}">
+
+    <tr th:each="post : ${posts}">
+
+        <form th:object="${post}" action="#" method="POST" th:action="@{/deletePost}">
+
+            <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
+            <td th:text="${post.creationDate}"></td>
+            <input type="submit" value="Delete"/>
+            <br/><br/>
+
+        </form>
+    </tr>
+</div>
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 
 </body>
 </html>
+

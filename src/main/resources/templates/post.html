@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
@@ -27,25 +28,19 @@
 
     <h3>Komentarze: </h3>
     <div id="commentSection" th:switch="${true}">
-        <p th:case="${numberOfComments lt 1}">Brak komentarzy</p>
-
+        <p th:case="${numberOfComments == 0}">Brak komentarzy</p>
         <p th:case="${numberOfComments gt 0}">
 
             <tr th:each="comment: ${specificPost.comments}">
-        <p id="title" th:text="${comment.username}"></p>
-        <td th:text="${comment.commentsDate}"></td>
-        <td th:text="${comment.commentsContent}"></td>
-        </tr>
-        </p>
+                <p id="title" th:text="${comment.username}"></p>
+                <td th:text="${comment.commentsDate}"></td>
+                <td th:text="${comment.commentsContent}"></td>
+            </tr>
 
+        </p>
     </div>
 
     <button id="addCommentButton" type="button">Add comment</button>
-    <p>
-        This is the paragraph to end all paragraphs. You
-        should feel <em>lucky</em> to have seen such a paragraph in
-        your life. Congratulations!
-    </p>
 
 
     <div style="display: none" id="addComent">
@@ -62,6 +57,12 @@
                 <input type="submit" value="Add"/>
             </div>
         </form>
+
+        <p>
+            This is the paragraph to end all paragraphs. You
+            should feel <em>lucky</em> to have seen such a paragraph in
+            your life. Congratulations!
+        </p>
     </div>
 </div>
 
@@ -76,6 +77,5 @@
     //    });
 </script>
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
-
 </body>
 </html>

@@ -19,7 +19,7 @@
     <h2 class="form-signin-heading">Create your account</h2>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-       User name: <input type="text" th:id="username" th:field="*{username}"/>
+        User name: <input type="text" th:id="username" th:field="*{username}"/>
 
     </div>
     <div class="form-group ${error != null ? 'has-error' : ''}">
@@ -28,12 +28,12 @@
     </div>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-       Password: <input type="password" th:id="password" th:field="*{password}"/>
+        Password: <input type="password" th:id="password" th:field="*{password}"/>
     </div>
 
     <div class="form-group ${error != null ? 'has-error' : ''}">
-        Confirm: <input type="password" path="passwordConfirm" class="form-control"
-               placeholder="Confirm your password"/>
+        Confirm: <input type="password" th:id="passwordConfirm" th:field="*{passwordConfirm}" class="form-control"
+                        placeholder="Confirm your password"/>
     </div>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>

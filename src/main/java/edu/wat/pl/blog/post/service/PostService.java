@@ -28,11 +28,15 @@ public class PostService {
 
     public void savePost(Post newPost) {
         newPost.setCreationDate(TimeUtils.getCurrentTime());
-        if(newPost.getComments() == null || newPost.getComments().isEmpty()) {
+        if (newPost.getComments() == null || newPost.getComments().isEmpty()) {
             newPost.setComments(new ArrayList<>());
-            newPost.getComments().add(new Comment("","",""));
+            newPost.getComments().add(new Comment("", "", ""));
         }
         postRepository.save(newPost);
+    }
+
+    public void deletePost(Post post) {
+        postRepository.delete(post);
     }
 
     public List<Post> findAllPosts() {

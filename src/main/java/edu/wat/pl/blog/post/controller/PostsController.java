@@ -35,6 +35,12 @@ public class PostsController {
         titlesService.saveTitle(post);
         return "redirect:/";
     }
+    @RequestMapping(value = "/deletePost", method = RequestMethod.POST)
+    public String deletePost(Post post) {
+        logger.info("Post to be deleted has been captured: " + post.toString());
+        postService.deletePost(post);
+        return "redirect:/posts";
+    }
 
     @RequestMapping(value = "/add_post", method = RequestMethod.GET)
     public String admin(Model model) {
@@ -44,15 +50,16 @@ public class PostsController {
 
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public String showAllPosts(Model model) {
+        model.addAttribute("posts", postService.findAllPosts());
         return "posts";
     }
 
     @GetMapping("/post/{postId}")
     public String showSpecificPost(Model model, @PathVariable("postId") String id) {
         Post post = postService.findPostById(id);
-        if(post.getComments() == null || post.getComments().isEmpty()) {
+        if (post.getComments() == null || post.getComments().isEmpty()) {
             post.setComments(new ArrayList<>());
-            post.getComments().add(new Comment("","",""));
+            post.getComments().add(new Comment("", "", ""));
         }
         model.addAttribute("specificPost", post);
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
