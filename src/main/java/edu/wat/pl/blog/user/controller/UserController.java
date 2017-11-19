@@ -32,6 +32,8 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("user", new User());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "registration";
     }
 
@@ -46,9 +48,9 @@ public class UserController {
 
         userService.saveUser(user);
 
-        securityService.autologin(user.getUsername(), user.getPasswordConfirm());
+        securityService.autologin(user.getUsername(), user.getPassword());
 
-        return "redirect:/posts";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -59,6 +61,9 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
         model.addAttribute("user", new User());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "login";
     }
 

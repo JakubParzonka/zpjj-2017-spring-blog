@@ -1,5 +1,6 @@
 package edu.wat.pl.blog.auth;
 
+import edu.wat.pl.blog.auth.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -11,15 +12,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -43,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/post/{postId}", "/add_post", "/posts", "/registration", "/post/", "/css/main.css").permitAll()
+                .antMatchers("/", "/post/{postId}", "/add_post", "/posts", "/registration", "/post/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -51,19 +52,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and();
+                .permitAll();
 
-        http.csrf().disable();
+      //  http.csrf().disable();
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/resources/**").anyRequest();
+//    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("parzon").password("parzon").roles("USER");
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 }

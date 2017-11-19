@@ -7,6 +7,8 @@ import edu.wat.pl.blog.title.service.TitlesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,12 +47,17 @@ public class PostsController {
     @RequestMapping(value = "/add_post", method = RequestMethod.GET)
     public String admin(Model model) {
         model.addAttribute("post", new Post());
+        //TODO domyślnie tylko admin
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "addPost";
     }
 
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public String showAllPosts(Model model) {
         model.addAttribute("posts", postService.findAllPosts());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "posts";
     }
 
@@ -63,6 +70,8 @@ public class PostsController {
         }
         model.addAttribute("specificPost", post);
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "post";
     }
 

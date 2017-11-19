@@ -41,14 +41,15 @@
             </div>
 
             <button id="addCommentButton" type="button">Add comment</button>
-            <p>
-                This is the paragraph to end all paragraphs. You
-                should feel <em>lucky</em> to have seen such a paragraph in
-                your life. Congratulations!
-            </p>
+
 
 
     <div style="display: none" id="addComent">
+        <p>
+            This is the paragraph to end all paragraphs. You
+            should feel <em>lucky</em> to have seen such a paragraph in
+            your life. Congratulations!
+        </p>
         <form th:cellpadding="10px" action="#" method="POST" th:action="@{/addComment}"
               th:object="${specificPost.comments[__${numberOfComments-1}__]}" id="commentForm">
 
