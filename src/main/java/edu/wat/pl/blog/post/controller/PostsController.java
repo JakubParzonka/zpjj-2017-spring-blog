@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -37,10 +38,11 @@ public class PostsController {
         titlesService.saveTitle(post);
         return "redirect:/";
     }
-    @RequestMapping(value = "/deletePost", method = RequestMethod.POST)
-    public String deletePost(Post post) {
-        logger.info("Post to be deleted has been captured: " + post.toString());
-        postService.deletePost(post);
+
+    @GetMapping(value = "/deletePost/{postId}")
+    public String deletePost(Model model, @PathVariable("postId") String id) {
+        logger.info("Post to be deleted has been captured with id: " + id);
+        postService.deletePost(id);
         return "redirect:/posts";
     }
 
@@ -55,9 +57,12 @@ public class PostsController {
 
     @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public String showAllPosts(Model model) {
-        model.addAttribute("posts", postService.findAllPosts());
+        List<Post> posts = postService.findAllPosts();
+        int postsNumber = posts.size();
+        model.addAttribute("posts", posts);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
+        model.addAttribute("postsNumber", postsNumber);
         return "posts";
     }
 
@@ -78,8 +83,8 @@ public class PostsController {
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Post post) {
         logger.info("Post with a comment has been captured: " + post.getComments().toString());
-        postService.updatePostWithComment(post);
-        return "redirect:/";
+//       postService.updatePostWithComment(post);
+        return "redirect:/post/" + post.getId();
     }
 
 

@@ -17,16 +17,15 @@
 
     <tr th:each="post : ${posts}">
 
-        <form th:object="${post}" action="#" method="POST" th:action="@{/deletePost}">
-
+        <td>
             <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
-            <td th:text="${post.creationDate}"></td>
-            <input type="submit" value="Delete"/>
-            <br/><br/>
-
-        </form>
+        <td th:text="${post.creationDate}"></td>
+        <a th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
+        <br/><br/>
+        </td>
     </tr>
 </div>
+
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 
 </body>

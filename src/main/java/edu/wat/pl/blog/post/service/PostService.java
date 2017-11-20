@@ -11,8 +11,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +33,8 @@ public class PostService {
         postRepository.save(newPost);
     }
 
-    public void deletePost(Post post) {
-        postRepository.delete(post);
+    public void deletePost(String id) {
+        postRepository.deletePostById(id);
     }
 
     public List<Post> findAllPosts() {
