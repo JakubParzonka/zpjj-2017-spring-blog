@@ -33,6 +33,7 @@ public class UserController {
     public String registration(Model model) {
         model.addAttribute("user", new User());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "registration";
     }
@@ -61,8 +62,8 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
         model.addAttribute("user", new User());
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "login";
     }

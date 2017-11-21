@@ -5,6 +5,7 @@ import edu.wat.pl.blog.comment.CommentService;
 import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.service.PostService;
 import edu.wat.pl.blog.title.service.TitlesService;
+import edu.wat.pl.blog.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class PostsController {
     private PostService postService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private CommentService commentService;
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
@@ -48,6 +52,8 @@ public class PostsController {
     public String deletePost(Model model, @PathVariable("postId") String id) {
         logger.info("Post to be deleted has been captured with id: " + id);
         postService.deletePost(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         return "redirect:/posts";
     }
 
@@ -57,6 +63,7 @@ public class PostsController {
         //TODO domyślnie tylko admin
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         return "addPost";
     }
 
@@ -68,6 +75,7 @@ public class PostsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         model.addAttribute("postsNumber", postsNumber);
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         return "posts";
     }
 
@@ -82,6 +90,7 @@ public class PostsController {
         model.addAttribute("comment", new Comment());
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         session.setAttribute("post", post);
         return "post";
@@ -90,6 +99,7 @@ public class PostsController {
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Comment comment, HttpSession session) {
         Post post = (Post) session.getAttribute("post");
+
         logger.info("Post with a comment has been captured.");
         commentService.updatePostWithComment(post, comment);
         return "redirect:/post/" + post.getId();

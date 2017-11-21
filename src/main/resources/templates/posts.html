@@ -20,7 +20,7 @@
         <td>
             <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
         <td th:text="${post.creationDate}"></td>
-        <a th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
+        <a th:if="${isAdmin}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
         <br/><br/>
         </td>
     </tr>

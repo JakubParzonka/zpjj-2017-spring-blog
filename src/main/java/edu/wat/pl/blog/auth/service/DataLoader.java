@@ -1,5 +1,6 @@
 package edu.wat.pl.blog.auth.service;
 
+import edu.wat.pl.blog.role.RoleEnum;
 import edu.wat.pl.blog.user.model.User;
 import edu.wat.pl.blog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,11 @@ import javax.annotation.PostConstruct;
 @Service
 public class DataLoader {
 
-
     @Autowired
     private UserRepository userRepository;
 
     @PostConstruct
     private void initDatabase() {
-
-//        userRepository.deleteAll();
-
         if (userRepository.findByUsername("parzon") == null) {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             User user = new User();
@@ -30,10 +27,9 @@ public class DataLoader {
             user.setAccountNonExpired(true);
             user.setAccountNonLocked(true);
             user.setCredentialsNonExpired(true);
-            user.addRole("ROLE_USER");
-            user.addRole("ROLE_ADMIN");
+            user.addRole(RoleEnum.ADMIN.name());
+            user.addRole(RoleEnum.USER.name());
             userRepository.save(user);
         }
     }
-
 }
