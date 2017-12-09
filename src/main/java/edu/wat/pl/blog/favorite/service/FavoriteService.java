@@ -23,18 +23,17 @@ public class FavoriteService {
     @Autowired
     private UserService userService;
 
-    public List<Post> getFavPosts(String username) {
-        List<String> postsId = getFavPostsIdForSpecificUser(username);
+    public List<Post> getFavPosts(User user) {
+        List<String> postsId = getFavPostsIdForSpecificUser(user);
         return postsId.stream().map(postId -> postService.findPostById(postId)).collect(Collectors.toList());
     }
 
-    private List<String> getFavPostsIdForSpecificUser(String username) {
+    private List<String> getFavPostsIdForSpecificUser(User user) {
         //username is getting from context, so can not be null
-        User user = userService.findUserByUsername(username);
         List<String> postsId = user.getFavorites().stream().map(Favorite::getPostId).collect(Collectors.toList());
 
-        if (postsId.isEmpty()) System.err.println("Found 0 favorite posts for " + username);
-        else System.out.println("Found " + postsId.size() + " favorite posts for " + username);
+        if (postsId.isEmpty()) System.out.println("Found 0 favorite posts for " + user.getUsername());
+        else System.out.println("Found " + postsId.size() + " favorite posts for " + user.getUsername());
 
         return postsId;
     }
@@ -55,6 +54,7 @@ public class FavoriteService {
             if (user.getFavorites().stream().noneMatch(favorite -> Objects.equals(favorite.getPostId(), postId)))
                 user.getFavorites().add(new Favorite(postId));
         }
-        System.out.println("Post " + postId + " added to " + user.getUsername() + "favorites list");
+        System.out.println("Post " + postId + " added to " + user.getUsername() + " favorites list");
+        userService.saveUser(user);
     }
 }

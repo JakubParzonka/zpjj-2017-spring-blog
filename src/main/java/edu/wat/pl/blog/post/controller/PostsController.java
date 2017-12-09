@@ -104,6 +104,7 @@ public class PostsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         model.addAttribute("postsNumber", postsNumber);
+        model.addAttribute("isInFav", false);
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         return "posts";
     }
