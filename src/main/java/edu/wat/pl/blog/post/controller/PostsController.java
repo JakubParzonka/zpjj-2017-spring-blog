@@ -41,20 +41,40 @@ public class PostsController {
     private CommentService commentService;
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost(Post post) {
+    public String addPost(Post post, HttpSession session) {
         logger.info("Post object has been captured: " + post.toString());
-        postService.savePost(post);
-        titlesService.saveTitle(post);
-        return "redirect:/";
+        Post postFromSession = (Post) session.getAttribute("post");
+        postFromSession.setTitle(post.getTitle());
+        postFromSession.setContents(post.getContents());
+        postService.savePost(postFromSession);
+        // dodać flagę czy update czy nie
+        return "redirect:/post/" + postFromSession.getId();
     }
 
     @GetMapping(value = "/deletePost/{postId}")
     public String deletePost(Model model, @PathVariable("postId") String id) {
-        logger.info("Post to be deleted has been captured with id: " + id);
+        logger.info("Post to deleted has been captured with id: " + id);
         postService.deletePost(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        model.addAttribute("title", "Add post");
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         return "redirect:/posts";
+    }
+
+    @GetMapping(value = "/editPost/{postId}")
+    public String editPost(Model model, HttpSession session, @PathVariable("postId") String id) {
+        logger.info("Post to update has been captured with id: " + id);
+        //  postService.savePost(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Post post = postService.findPostById(id);
+        session.setAttribute("post", post);
+
+        model.addAttribute("post", post);
+        model.addAttribute("title", "Edit post");
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
+        return "addPost";
     }
 
     @RequestMapping(value = "/add_post", method = RequestMethod.GET)

@@ -1,14 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Blog</title>
+    <title th:text="${title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body>
 
@@ -19,19 +25,24 @@
     <div>Title:</div>
     <div>
         <label>
-            <input type="text" th:id="title" th:field="*{title}"/>
+            <input type="text" th:id="title" th:text="${post.title}" th:field="*{title}"/>
         </label>
     </div>
     <div>Content:</div>
+   <!--/ <form id="summernote" th:field="*{contents}"><p>Hello Summernote</p></form>-->
     <div>
         <label>
-            <textarea rows="20" cols="80" th:field="*{contents}" form="myform">... </textarea>
+            <textarea rows="20" cols="80" th:field="*{contents}" form="myform">${post.contents}</textarea>
         </label>
     </div>
     <div>
-        <input type="submit" value="Add"/>
+        <input type="submit" value="Accept"/>
     </div>
 </form>
-<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+<script>
+//    $(document).ready(function() {
+//        $('#summernote').summernote();
+//    });
+</script>
 </body>
 </html>

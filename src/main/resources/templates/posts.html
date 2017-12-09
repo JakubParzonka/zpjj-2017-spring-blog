@@ -20,6 +20,8 @@
         <td>
             <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
         <td th:text="${post.creationDate}"></td>
+        <a th:href="@{/addToFavorities/{id}(id=${post.id})}">Add to favorities</a>
+        <a th:if="${isAdmin}" th:href="@{/editPost/{id}(id=${post.id})}">Edit</a>
         <a th:if="${isAdmin}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
         <br/><br/>
         </td>

@@ -17,7 +17,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public void savePost(Post newPost) {
-        newPost.setCreationDate(TimeUtils.getCurrentTime());
+        if (newPost.getCreationDate() == null) newPost.setCreationDate(TimeUtils.getCurrentTime());
         if (newPost.getComments() == null || newPost.getComments().isEmpty()) {
             newPost.setComments(new ArrayList<>());
             newPost.getComments().add(new Comment("", "", ""));
