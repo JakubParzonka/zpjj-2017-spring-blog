@@ -40,4 +40,5 @@ public class UserService {
         return auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()).contains(RoleEnum.ADMIN.name());
     }
 
+
 }

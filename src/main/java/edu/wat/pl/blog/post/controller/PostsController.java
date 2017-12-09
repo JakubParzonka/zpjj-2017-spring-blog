@@ -43,12 +43,21 @@ public class PostsController {
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
     public String addPost(Post post, HttpSession session) {
         logger.info("Post object has been captured: " + post.toString());
+        String id;
         Post postFromSession = (Post) session.getAttribute("post");
-        postFromSession.setTitle(post.getTitle());
-        postFromSession.setContents(post.getContents());
-        postService.savePost(postFromSession);
+        if (postFromSession != null) {
+            //edit
+            postFromSession.setTitle(post.getTitle());
+            postFromSession.setContents(post.getContents());
+            postService.savePost(postFromSession);
+            id = postFromSession.getId();
+        } else {
+            postService.savePost(post);
+            id = post.getId();
+        }
         // dodać flagę czy update czy nie
-        return "redirect:/post/" + postFromSession.getId();
+        return "redirect:/post/" + id;
+
     }
 
     @GetMapping(value = "/deletePost/{postId}")

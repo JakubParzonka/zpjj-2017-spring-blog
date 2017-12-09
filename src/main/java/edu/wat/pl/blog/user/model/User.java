@@ -1,6 +1,7 @@
 package edu.wat.pl.blog.user.model;
 
 
+import edu.wat.pl.blog.favorite.model.Favorite;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,7 +28,15 @@ public class User {
     private boolean enabled;
 
     private Set<String> roles = new HashSet<String>();
+    private Set<Favorite> favorites = new HashSet<Favorite>();
 
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
+    }
 
     public String getUsername() {
         return username;
@@ -100,6 +109,5 @@ public class User {
     public void addRole(String role) {
         roles.add(role);
     }
-
 
 }
