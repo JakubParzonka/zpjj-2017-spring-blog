@@ -1,5 +1,4 @@
 package edu.wat.pl.blog.user.controller;
-
 import edu.wat.pl.blog.auth.service.SecurityService;
 import edu.wat.pl.blog.user.service.UserService;
 import edu.wat.pl.blog.auth.validator.UserValidator;
@@ -33,12 +32,16 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("user", new User());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-        userValidator.validate(user, bindingResult);
+//        userValidator.validate(user, bindingResult);
+
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(X -> System.err.println(X.toString()));
             return "registration";
@@ -46,9 +49,9 @@ public class UserController {
 
         userService.saveUser(user);
 
-        securityService.autologin(user.getUsername(), user.getPasswordConfirm());
+        securityService.autologin(user.getUsername(), user.getPassword());
 
-        return "redirect:/posts";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -59,6 +62,9 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
         model.addAttribute("user", new User());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "login";
     }
 

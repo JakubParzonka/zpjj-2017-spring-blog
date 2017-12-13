@@ -1,8 +1,14 @@
-h1{
-    color:#0000FF;
+a {
+    color: inherit;
 }
 
-h2{
-    color:#FF0000;
+a:hover {
+    color: inherit;
 }
 
+#footer {
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    left:0
+}

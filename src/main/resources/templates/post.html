@@ -5,64 +5,72 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-    <div id="postContainer" th:unless="${specificPost == null}">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mt-4" th:text="${specificPost.title}"></h1>
+            <tr> <td>
+                    <span>Posted on: </span>
+                    <span th:text="${specificPost.creationDate}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/addToFavorites/{id}(id=${specificPost.id})}"><span>Add to favorites</span></a>
+                </td>
 
-        <h1 th:text="${specificPost.title}"></h1>
-        <td th:text="${specificPost.creationDate}"></td>
-        <p th:text="${specificPost.contents}"></p>
-
-
-    </div>
-
-
-    <h3>Komentarze: </h3>
-    <div id="commentSection" th:switch="${true}">
-        <p th:case="${numberOfComments == 0}">Brak komentarzy</p>
-        <p th:case="${numberOfComments gt 0}">
-
-            <tr th:each="comment: ${specificPost.comments}">
-                <p id="title" th:text="${comment.username}"></p>
-                <td th:text="${comment.commentsDate}"></td>
-                <td th:text="${comment.commentsContent}"></td>
             </tr>
+            <hr/>
+            <!--ZDJECIE-->
+            <p th:text="${specificPost.contents}"></p>
 
-        </p>
-    </div>
+            <hr/>
+            <h3>Komentarze: </h3>
+            <div id="commentSection" th:switch="${true}">
+                <p th:case="${numberOfComments lt 1}">Brak komentarzy</p>
 
-    <button id="addCommentButton" type="button">Add comment</button>
+                <p th:case="${numberOfComments gt 0}">
+                    <tr th:each="comment: ${specificPost.comments}">
+                        <p id="title" th:text="${comment.commentsContent}" ></p>
+                        <td th:text="${comment.commentsDate}"></td>
+                        <td th:text="${comment.username}"></td>
+                        <br/><br/>
+                    </tr>
+                </p>
 
-
-    <div style="display: none" id="addComent">
-        <form th:cellpadding="10px" action="#" method="POST" th:action="@{/addComment}"
-              th:object="${specificPost.comments[__${numberOfComments-1}__]}" id="commentForm">
-
-            <div>Your comment:</div>
-            <div>
-                <label>
-                    <textarea rows="10" cols="80" th:field="*{commentsContent}" form="commentForm">... </textarea>
-                </label>
             </div>
-            <div>
-                <input type="submit" value="Add"/>
-            </div>
-        </form>
 
-        <p>
-            This is the paragraph to end all paragraphs. You
-            should feel <em>lucky</em> to have seen such a paragraph in
-            your life. Congratulations!
-        </p>
+            <button id="addCommentButton" type="button">Add comment</button>
+
+
+            <div style="display: none" id="addComent">
+                <p>
+                    This is the paragraph to end all paragraphs. You
+                    should feel <em>lucky</em> to have seen such a paragraph in
+                    your life. Congratulations!
+                </p>
+                <form th:cellpadding="10px" action="#" method="POST" th:action="@{/addComment}" th:object="${comment}"
+                      id="commentForm">
+                    <div>Your comment:</div>
+                    <div>
+                        <label>
+                            <textarea rows="10" cols="80" th:field="*{commentsContent}"
+                                      form="commentForm">... </textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add"/>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -70,11 +78,6 @@
     $("#addCommentButton").click(function () {
         $("#addComent").slideToggle("slow");
     });
-
-
-    //    $("button").click(function () {
-    //        $("a").slideToggle("slow");
-    //    });
 </script>
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </body>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
@@ -17,16 +17,18 @@
 
     <tr th:each="post : ${posts}">
 
-        <form th:object="${post}" action="#" method="POST" th:action="@{/deletePost}">
-
+        <td>
             <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
-            <td th:text="${post.creationDate}"></td>
-            <input type="submit" value="Delete"/>
-            <br/><br/>
-
-        </form>
+        <td th:text="${post.creationDate}"></td>
+        <a th:if="${!isInFav}" th:href="@{/addToFavorites/{id}(id=${post.id})}">Add to favorites</a>
+        <a th:if="${isAdmin and !isInFav}" th:href="@{/editPost/{id}(id=${post.id})}">Edit</a>
+        <a th:if="${isAdmin and !isInFav}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
+        <a th:if="${isInFav}" th:href="@{/removeFromFav/{id}(id=${post.id})}">Remove from favorites</a>
+        <br/><br/>
+        </td>
     </tr>
 </div>
+
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 
 </body>

@@ -1,9 +1,13 @@
 package edu.wat.pl.blog.user.model;
 
 
-import edu.wat.pl.blog.role.model.Role;
+import edu.wat.pl.blog.favorite.model.Favorite;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Document(collection = "users")
 public class User {
@@ -11,24 +15,27 @@ public class User {
     @Id
     private String id;
 
+    @Indexed(unique = true)
     private String username;
 
     private String password;
+    private String firstName;
+    private String lastName;
 
-    private String passwordConfirm;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
 
-    private String email;
+    private Set<String> roles = new HashSet<String>();
+    private Set<Favorite> favorites = new HashSet<Favorite>();
 
-    private String userSignUpDate;
-
-    private Role role;
-
-    public String getId() {
-        return id;
+    public Set<Favorite> getFavorites() {
+        return favorites;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
     }
 
     public String getUsername() {
@@ -47,35 +54,60 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUserSignUpDate() {
-        return userSignUpDate;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserSignUpDate(String userSignUpDate) {
-        this.userSignUpDate = userSignUpDate;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Role getRole() {
-        return role;
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void addRole(String role) {
+        roles.add(role);
+    }
+
 }
