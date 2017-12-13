@@ -122,7 +122,7 @@ public class PostsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
-        session.setAttribute("post", post);
+//        session.setAttribute("post", post);
         return "post";
     }
 
