@@ -23,7 +23,7 @@
                     <span th:text="${specificPost.creationDate}"></span>
                 </td>
                 <td>
-                    <a th:href="@{/addToFavorites/{id}(id=${specificPost.id})}"><span>Add to favorites</span></a>
+                    <a th:if="${!isInFav}"  th:href="@{/addToFavorites/{id}(id=${specificPost.id})}"><span>Add to favorites</span></a>
                 </td>
 
             </tr>

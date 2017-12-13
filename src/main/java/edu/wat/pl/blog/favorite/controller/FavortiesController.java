@@ -31,6 +31,7 @@ public class FavortiesController {
     public String addToFavorites(Model model, @PathVariable("postId") String id) {
         User user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         favoriteService.addPostToFavorities(user, id);
+        model.addAttribute("isInFav", true);
         return "redirect:/post/" + id;
     }
 

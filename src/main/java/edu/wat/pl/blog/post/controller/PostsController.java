@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -44,13 +45,15 @@ public class PostsController {
     public String addPost(Post post, HttpSession session) {
         logger.info("Post object has been captured: " + post.toString());
         String id;
+        boolean postToEdit = Boolean.valueOf(String.valueOf(session.getAttribute("postToEdit")));
         Post postFromSession = (Post) session.getAttribute("post");
-        if (postFromSession != null) {
+        if (postFromSession != null && postToEdit) {
             //edit
             postFromSession.setTitle(post.getTitle());
             postFromSession.setContents(post.getContents());
             postService.savePost(postFromSession);
             id = postFromSession.getId();
+            session.removeAttribute("postToEdit");
         } else {
             postService.savePost(post);
             id = post.getId();
@@ -79,7 +82,7 @@ public class PostsController {
 
         Post post = postService.findPostById(id);
         session.setAttribute("post", post);
-
+        session.setAttribute("postToEdit", true);
         model.addAttribute("post", post);
         model.addAttribute("title", "Edit post");
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
@@ -121,8 +124,9 @@ public class PostsController {
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
+        model.addAttribute("isInFav", getFavPostStatus(post));
         model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
-//        session.setAttribute("post", post);
+        session.setAttribute("post", post);
         return "post";
     }
 
@@ -133,6 +137,12 @@ public class PostsController {
         logger.info("Post with a comment has been captured.");
         commentService.updatePostWithComment(post, comment);
         return "redirect:/post/" + post.getId();
+    }
+
+
+    private boolean getFavPostStatus(Post post) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userService.findUserByUsername(auth.getName()).getFavorites().stream().anyMatch(favorite -> Objects.equals(favorite.getPostId(), post.getId()));
     }
 
 
