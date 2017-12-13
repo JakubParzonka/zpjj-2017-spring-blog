@@ -12,3 +12,9 @@ a:hover {
     bottom: 0;
     left:0
 }
+
+.well {
+    width: 600px;
+    margin: auto;
+    margin-bottom: 15px;
+}
