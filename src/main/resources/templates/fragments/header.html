@@ -19,11 +19,20 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li th:if="${isAdmin}" th:classappend="${#httpServletRequest.getRequestURI() == '/add_post' ? 'active':''}"><a th:href="@{/add_post}"><span>New post</span></a></li>
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/posts' ? 'active':''}"><a th:href="@{/posts}"><span>See all Posts</span></a></li>
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/favorities' ? 'active':''}"><a th:href="@{/favorites}"><span>Favorites</span></a></li>
-                <li th:if="${username} == 'anonymousUser'" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}"><a th:href="@{/login}"><span>Sign in</span></a></li>
-                <li th:if="${username} == 'anonymousUser'" th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active':''}"><a th:href="@{/registration}"><span>Sign up</span></a></li>
+                <li th:if="${isAdmin}"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/add_post' ? 'active':''}"><a
+                        th:href="@{/add_post}"><span>New post</span></a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/posts' ? 'active':''}"><a
+                        th:href="@{/posts}"><span>See all Posts</span></a></li>
+                <li th:unless="${username} == 'anonymousUser'"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/favorities' ? 'active':''}"><a
+                        th:href="@{/favorites}"><span>Favorites</span></a></li>
+                <li th:if="${username} == 'anonymousUser'"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}"><a
+                        th:href="@{/login}"><span>Sign in</span></a></li>
+                <li th:if="${username} == 'anonymousUser'"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active':''}"><a
+                        th:href="@{/registration}"><span>Sign up</span></a></li>
                 <li><a><span th:text="'Zalogowany: ' + ${username}"></span></a></li>
             </ul>
             <form th:action="@{/logout}" method="post">

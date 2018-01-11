@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/post/{postId}", "/add_post", "/posts", "/registration", "/post/").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/templates/**", "/static/**", "/js/**", "/images/**", "/", "/post/{postId}", "/add_post", "/posts", "/registration", "/post/").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
-      //  http.csrf().disable();
+        http.csrf().disable();
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
