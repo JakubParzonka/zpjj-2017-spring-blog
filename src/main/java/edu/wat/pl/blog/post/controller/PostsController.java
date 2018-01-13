@@ -3,6 +3,7 @@ package edu.wat.pl.blog.post.controller;
 import edu.wat.pl.blog.comment.Comment;
 import edu.wat.pl.blog.comment.CommentService;
 import edu.wat.pl.blog.post.model.Post;
+import edu.wat.pl.blog.post.model.PostDTO;
 import edu.wat.pl.blog.post.service.PostService;
 import edu.wat.pl.blog.title.service.TitlesService;
 import edu.wat.pl.blog.user.service.UserService;
@@ -13,10 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -42,10 +40,15 @@ public class PostsController {
     private CommentService commentService;
 
     @RequestMapping(value = "/addPost", method = RequestMethod.POST)
-    public String addPost(Post post, HttpSession session) {
-        logger.info("Post object has been captured: " + post.toString());
+    public String addPost(@RequestBody PostDTO postDTO, HttpSession session) {
+        logger.info("Post object has been captured: " + postDTO.toString());
         String id;
         boolean postToEdit = Boolean.valueOf(String.valueOf(session.getAttribute("postToEdit")));
+
+        Post post = new Post();
+        post.setTitle(postDTO.getTitle());
+        post.setContents(postDTO.getContents());
+
         Post postFromSession = (Post) session.getAttribute("post");
         if (postFromSession != null && postToEdit) {
             //edit
