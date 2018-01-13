@@ -142,6 +142,7 @@ public class PostsController {
 
     private boolean getFavPostStatus(Post post) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (userService.findUserByUsername(auth.getName()) == null) return false;
         return userService.findUserByUsername(auth.getName()).getFavorites().stream().anyMatch(favorite -> Objects.equals(favorite.getPostId(), post.getId()));
     }
 
