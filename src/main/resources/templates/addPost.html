@@ -21,7 +21,7 @@
 <div th:replace="fragments/header :: header"></div>
 
 
-<form th:cellpadding="10px" action="#" method="POST" th:action="@{/addPost}" th:object="${post}" id="myform">
+<div th:cellpadding="10px" action="#" method="POST" th:action="@{/addPost}" th:object="${post}" id="myform">
     <div>Title:</div>
     <div>
         <label>
@@ -29,20 +29,41 @@
         </label>
     </div>
     <div>Content:</div>
-   <!--/ <form id="summernote" th:field="*{contents}"><p>Hello Summernote</p></form>-->
-    <div>
-        <label>
-            <textarea rows="20" cols="80" th:field="*{contents}" form="myform">${post.contents}</textarea>
-        </label>
-    </div>
-    <div>
-        <input type="submit" value="Accept"/>
-    </div>
-</form>
+    <textarea  id="summernote" th:field="*{contents}"><p>Hello Summernote</p></textarea >
+    <!--<div>-->
+        <!--<label>-->
+            <!--<textarea rows="20" cols="80" th:field="*{contents}" form="myform">${post.contents}</textarea>-->
+        <!--</label>-->
+    <!--</div>-->
+    <button id="save" class="btn btn-primary" onclick="save()" type="button">Zapisz post</button>
+</div>
 <script>
-//    $(document).ready(function() {
-//        $('#summernote').summernote();
-//    });
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+    var save = function() {
+        console.log("saving post using ajax")
+        var data = {}
+        data["title"] = $("#title").val();
+        data["contents"] = $("#summernote").summernote('code');
+
+        $("#save").prop("disabled", true);
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/addPost",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            timeout: 600000,
+            success: function (data) {
+                $("#save").prop("disabled", false);
+            },
+            error: function (e) {
+                $("#save").prop("disabled", false);
+            }
+        });
+    };
 </script>
 </body>
 </html>
