@@ -20,22 +20,18 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-
-<div th:cellpadding="10px" action="#" method="POST" th:action="@{/addPost}" th:object="${post}" id="myform">
-    <div>Title:</div>
-    <div>
-        <label>
-            <input type="text" th:id="title" th:text="${post.title}" th:field="*{title}"/>
-        </label>
+<div class="container">
+    <div th:cellpadding="10px" action="#" method="POST" th:action="@{/addPost}" th:object="${post}" id="myform">
+        <div class="form-group">
+            <label class="control-label">Title</label>
+            <input class="form-control" type="text" th:id="title" th:text="${post.title}" th:field="*{title}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Content</label>
+            <textarea rows="10" id="summernote" th:field="*{contents}" required="required"/>
+        </div>
+        <button id="save" class="btn btn-primary" onclick="save()" type="button">Save post</button>
     </div>
-    <div>Content:</div>
-    <textarea  id="summernote" th:field="*{contents}"><p>Hello Summernote</p></textarea >
-    <!--<div>-->
-        <!--<label>-->
-            <!--<textarea rows="20" cols="80" th:field="*{contents}" form="myform">${post.contents}</textarea>-->
-        <!--</label>-->
-    <!--</div>-->
-    <button id="save" class="btn btn-primary" onclick="save()" type="button">Zapisz post</button>
 </div>
 <script>
     $(document).ready(function() {

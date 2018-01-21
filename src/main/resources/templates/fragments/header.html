@@ -33,10 +33,16 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" th:if="${username} != 'anonymousUser'">
-            <li><a><span th:text="'Zalogowany: ' + ${username}"></span></a></li>
+            <li><a><span th:text="'Logged as: ' + ${username}"></span></a></li>
             <li style="padding-right: 10px;"><a href="/logout">Sign Out</a></li>
         </ul>
 </nav>
+
+<header class="page-heading">
+<div class="container">
+    <h1>Simple Blog</h1>
+</div>
+</header>
 
 </body>
 </html>

@@ -24,3 +24,5 @@ nbdist/
 .nb-gradle/
 *.log
 logs/spring-boot-logging.log
+*.log
+*.iml
