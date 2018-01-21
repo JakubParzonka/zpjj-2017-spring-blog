@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+
+body {
+    padding-top: 50px;
+    padding-bottom: 40px;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+header {
+    background-color: #009688;
+    margin: 0px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans Caption', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.container {
+}
+
 a {
     color: inherit;
 }
@@ -17,4 +42,34 @@ a:hover {
     width: 600px;
     margin: auto;
     margin-bottom: 15px;
+}
+
+.panel-login {
+    border-color: #ccc;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 500px;
+    margin:auto;
+}
+
+.custom-width {
+    width: 200px !important;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar-right {
+    padding-right: 20px;
+}
+
+.panel-body {
+    min-height: 500px;
 }

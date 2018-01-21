@@ -15,23 +15,14 @@
 
 <div class="container">
 
-    <div class="starter-template">
-        <h2>
-            Aktualne posty:
-        </h2>
-    </div>
-
     <div id="postContainer" th:unless="${posts == null}">
 
-        <tr th:each="post : ${posts}">
-
-            <a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a>
-            <td th:text="${post.creationDate}"></td>
-            <br/><br/>
-
-        </tr>
+        <div class="well" th:each="post : ${posts}">
+            <h2><a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a></h2>
+            <h4 th:text="${post.creationDate}"></h4>
+            <hr/>
+        </div>
     </div>
-
 </div>
 
 <script type="text/javascript"

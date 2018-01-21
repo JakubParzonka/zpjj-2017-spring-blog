@@ -12,22 +12,26 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+            <form th:cellpadding="10px" action="#" th:method="POST" th:action="@{/login}" th:id="loginForm">
+                <h2 class="form-signin-heading">Log in</h2>
 
-<form th:cellpadding="10px" action="#" th:method="POST" th:action="@{/login}" th:id="loginForm">
-    <h2 class="form-heading">Log in</h2>
-
-    <div class="form-group ${error != null ? 'has-error' : ''}">
-        <span th:text="${message}"></span>
-        <input type="text" th:id="username" th:field="${user.username}" autofocus="true"/>
-        <input type="password" th:id="password" th:field="${user.password}"/>
-        <span th:text="${error}"></span>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-        <h4 class="text-center"><a href="registration.html">Create an account</a></h4>
+                <div class="form-group ${error != null ? 'has-error' : ''}">
+                    <span th:text="${message}"></span>
+                    <input type="text" class="form-control" placeholder="Username" th:id="username" th:field="${user.username}" autofocus="true" style="margin-bottom: 15px;"/>
+                    <input type="password" class="form-control" placeholder="Password" th:id="password" th:field="${user.password}" style="margin-bottom: 15px;"/>
+                    <span th:text="${error}"></span>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button class="btn btn-lg btn-primary center-block custom-width" type="submit">Log In</button>
+                    <h4 class="text-center"><a href="registration.html">Create an account</a></h4>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
-
-<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+</div>
+<!--<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>-->
 
 </body>
 </html>
