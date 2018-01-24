@@ -39,15 +39,15 @@
     });
 
     var save = function () {
-        console.log("saving post using ajax")
+        console.log("saving post using ajax");
 
         var title = $("#title").val();
         var contents = $("#summernote").summernote('code');
         if (title === '' || contents === '') {
             alert("Title and content can not be empty!")
         } else {
-            console.log("Correct data input")
-            var data = {}
+            console.log("Correct data input");
+            var data = {};
             data["title"] = title;
             data["contents"] = contents;
 
@@ -62,11 +62,10 @@
                 timeout: 600000,
                 success: function (data) {
                     $("#save").prop("disabled", false);
-                    console.log(data)
+                    window.location.href = '/';
                 },
                 error: function (e) {
                     $("#save").prop("disabled", false);
-                    console.log(e)
                 }
             });
         }

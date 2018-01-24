@@ -22,8 +22,10 @@
             <span>Posted on: </span>
             <span th:text="${specificPost.creationDate}"></span><br/>
 
-            <a class="btn btn-warning" th:if="${!isInFav}"  th:href="@{/addToFavorites/{id}(id=${specificPost.id})}">Add to favorites</a>
-            <a class="btn btn-danger" th:if="${isInFav}"  th:href="@{/removeFromFav/{id}(id=${specificPost.id})}">Remove from favorites</a>
+            <a class="btn btn-warning" th:if="${!isInFav}" th:href="@{/addToFavorites/{id}(id=${specificPost.id})}">Add
+                to favorites</a>
+            <a class="btn btn-danger" th:if="${isInFav}" th:href="@{/removeFromFav/{id}(id=${specificPost.id})}">Remove
+                from favorites</a>
             <hr/>
 
             <p th:utext="${specificPost.contents}"></p>
@@ -39,9 +41,19 @@
             <span th:case="${numberOfComments gt 0}">
                 <div th:each="comment: ${specificPost.comments}">
                     <hr/>
-                    <h4 th:text="${comment.username}"></h4>
-                    <span th:text="${comment.commentsDate}"></span><br/>
-                    <p id="title" th:text="${comment.commentsContent}" ></p>
+
+                    <div class="aParent">
+                        <div>
+                            <h4 th:text="${comment.username}"></h4>
+                        </div>
+                        <div>
+                            <span th:text="${comment.commentsDate}"></span><br/>
+                        </div>
+                         <div>
+                            <button id="deleteComment" class="btn btn-danger" onclick="deleteComment()" type="button">Delete</button>
+                        </div>
+                    </div>
+                    <p id="title" th:text="${comment.commentsContent}"></p>
                     <hr/>
                 </div>
             </span>
@@ -54,7 +66,8 @@
             <form th:cellpadding="10px" action="#" method="POST" th:action="@{/addComment}" th:object="${comment}"
                   id="commentForm">
                 <br/><label class="control-label">Your comment</label><br/>
-                <textarea class="form-control" rows="10" cols="80" th:field="*{commentsContent}" form="commentForm" required="required"/><br/>
+                <textarea class="form-control" rows="10" cols="80" th:field="*{commentsContent}" form="commentForm"
+                          required="required"/><br/>
                 <input class="btn btn-primary" type="submit" value="Save"/>
             </form>
         </div>
@@ -65,6 +78,40 @@
     $("#addCommentButton").click(function () {
         $("#addComent").slideToggle("slow");
     });
+
+    var deleteComment = function () {
+        console.log("Deleting comment");
+
+        var title = $("#title").val();
+        var contents = $("#summernote").summernote('code');
+        if (title === '' || contents === '') {
+            alert("Title and content can not be empty!")
+        } else {
+            console.log("Correct data input");
+            var data = {};
+            data["title"] = title;
+            data["contents"] = contents;
+
+            $("#save").prop("disabled", true);
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/deleteComment",
+                data: JSON.stringify(data),
+                dataType: 'json',
+                timeout: 600000,
+                success: function (data) {
+                    $("#save").prop("disabled", false);
+                    window.location.href = '/';
+                },
+                error: function (e) {
+                    $("#save").prop("disabled", false);
+                }
+            });
+        }
+
+    };
 </script>
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </body>

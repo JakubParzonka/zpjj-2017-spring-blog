@@ -14,7 +14,6 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div id="postContainer" th:unless="${posts == null}">
-    <!--<h4 th:text="${postsNumber}"></h4>-->
     <div class="well" th:each="post : ${posts}">
             <h2><a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a></h2>
         <h4 th:text="${post.creationDate}"></h4>
@@ -23,24 +22,8 @@
         <a class="btn btn-danger" th:if="${isAdmin and !isInFav}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
         <a class="btn btn-danger" th:if="${isInFav}" th:href="@{/removeFromFav/{id}(id=${post.id})}">Remove from favorites</a>
     </div>
-
-    <!--<nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="/posts/1">1</a></li>
-            <li class="page-item"><a class="page-link" href="/posts/2">2</a></li>
-            <li class="page-item"><a class="page-link" href="/posts/3">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>-->
 </div>
-
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
-
 </body>
 </html>
 

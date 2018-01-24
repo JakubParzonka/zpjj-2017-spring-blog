@@ -21,6 +21,7 @@
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="summernote" level="application" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:1.11.1" level="project" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-thymeleaf:1.5.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.5.8.RELEASE" level="project" />
@@ -99,7 +100,7 @@
     <orderEntry type="library" name="Maven: org.zalando:jackson-datatype-problem:0.20.0" level="project" />
     <orderEntry type="library" name="Maven: org.zalando:faux-pas:0.4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars:jquery:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-data:4.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.13.8.RELEASE" level="project" />
   </component>

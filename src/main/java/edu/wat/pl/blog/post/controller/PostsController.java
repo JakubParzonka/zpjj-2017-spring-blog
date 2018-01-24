@@ -131,11 +131,18 @@ public class PostsController {
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Comment comment, HttpSession session) {
         Post post = (Post) session.getAttribute("post");
-
         logger.info("Post with a comment has been captured.");
         commentService.updatePostWithComment(post, comment);
         return "redirect:/post/" + post.getId();
     }
+    @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
+    public String deleteComment(Comment comment, HttpSession session) {
+        Post post = (Post) session.getAttribute("post");
+        logger.info("Post with a comment has been captured.");
+        commentService.updatePostWithComment(post, comment);
+        return "redirect:/post/" + post.getId();
+    }
+
 
 
     private boolean getFavPostStatus(Post post) {

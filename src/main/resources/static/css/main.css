@@ -73,3 +73,9 @@ a:hover {
 .panel-body {
     min-height: 500px;
 }
+
+.aParent div {
+    float: left;
+    padding-right: 10px;
+    clear: none;
+}
