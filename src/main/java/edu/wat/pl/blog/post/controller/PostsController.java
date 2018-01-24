@@ -5,7 +5,6 @@ import edu.wat.pl.blog.comment.CommentService;
 import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.model.PostDTO;
 import edu.wat.pl.blog.post.service.PostService;
-import edu.wat.pl.blog.title.service.TitlesService;
 import edu.wat.pl.blog.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +25,6 @@ import java.util.Objects;
 public class PostsController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    private TitlesService titlesService;
 
     @Autowired
     private PostService postService;
@@ -61,9 +57,7 @@ public class PostsController {
             postService.savePost(post);
             id = post.getId();
         }
-        // dodać flagę czy update czy nie
         return "redirect:/post/" + id;
-
     }
 
     @GetMapping(value = "/deletePost/{postId}")
@@ -89,6 +83,7 @@ public class PostsController {
         model.addAttribute("post", post);
         model.addAttribute("title", "Edit post");
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
+        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
         return "addPost";
     }
 
