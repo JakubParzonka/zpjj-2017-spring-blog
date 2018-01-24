@@ -1,26 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/*=========BASIC=========*/
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    margin:0;
+    padding:0;
+    height:100%;
+}
 
 body {
     padding-top: 50px;
-    padding-bottom: 40px;
-    font-family: 'Libre Franklin', sans-serif;
-}
-
-header {
-    background-color: #009688;
-    margin: 0px;
-    padding: 30px;
-    margin-bottom: 30px;
-    color: white;
+    padding-bottom: 10px;
+    margin:0;
+    font-family: Montserrat,Helvetica Neue,sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    height:100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'PT Sans Caption', Helvetica, Arial, sans-serif;
     font-weight: 700;
-}
-
-.container {
 }
 
 a {
@@ -29,19 +32,149 @@ a {
 
 a:hover {
     color: inherit;
+    cursor: pointer;
 }
 
+header {
+    background-color: #333333;
+    margin: 0px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+/*=========NAVBAR=========*/
+.navbar-default {
+    text-align: center;
+    background-color: #333333;
+    margin: 0;
+    font-size: 1.1em;
+    border: 0;
+    box-shadow: 0 1px 0 hsla(0,0%,95%,.1);
+    transition: padding 0.5s linear;
+}
+
+.navbar-default a {
+    color: hsla(0, 0%, 100%, .4);
+}
+
+.navbar-default a:hover {
+    color: white!important;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar-default .navbar-nav > .active{
+    color: white;
+    background: #404040;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+    background: #404040;
+}
+
+.navbar-right {
+    padding-right: 20px;
+}
+
+.panel-body {
+    min-height: 500px;
+}
+/*=========FOOTER=========*/
 #footer {
-    text-align: left;
+    text-align: center;
+    width: 100%;
     position: fixed;
+    background-color: #333333;
+    color: #eeeeee;
     bottom: 0;
-    left:0
+    border: 0;
+    box-shadow: 3px 3px 3px red;
 }
 
+.socials
+{
+    width:100%;
+    text-align: center;
+    background-color: #333333;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.socialdivs
+{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fb
+{
+    width: 250px;
+    height: 155px;
+    float:left;
+}
+
+.fb:hover
+{
+    background-color: #4668b3;
+}
+
+.yt
+{
+    width: 250px;
+    height: 155px;
+    float:left;
+}
+
+.yt:hover
+{
+    background-color: #d94348;
+}
+
+.tw
+{
+    width: 250px;
+    height: 155px;
+    float:left;
+}
+
+.tw:hover
+{
+    background-color: #3095d3;
+}
+
+.gplus
+{
+    width: 250px;
+    height: 155px;
+    float:left;
+}
+
+.gplus:hover
+{
+    background-color: #d95333;
+}
+
+a.sociallink
+{
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    width: 250px;
+    height: 155px;
+}
+
+/*=========CUSTOM=========*/
 .well {
     width: 600px;
-    margin: auto;
-    margin-bottom: 15px;
+    margin: auto auto 15px;
 }
 
 .panel-login {
@@ -54,22 +187,4 @@ a:hover {
 
 .custom-width {
     width: 200px !important;
-}
-
-.navbar {
-    text-align: center;
-}
-
-.navbar .navbar-nav {
-    display: inline-block;
-    float: none;
-    vertical-align: top;
-}
-
-.navbar-right {
-    padding-right: 20px;
-}
-
-.panel-body {
-    min-height: 500px;
 }
