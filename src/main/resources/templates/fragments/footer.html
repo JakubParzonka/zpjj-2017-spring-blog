@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    ...
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-<div id="footer" th:fragment="footer">
-    &copy; 2017 Footer
+
+<div th:fragment="footer">
+    <div class="socials">
+        <div class="socialdivs">
+            <div class="fb">
+                <a href="http://facebook.com" target="_blank" class="sociallink"><i class="icon-facebook"></i></a>
+            </div>
+            <div class="yt">
+                <a href="http://youtube.com" target="_blank" class="sociallink"><i class="icon-youtube"></i></a>
+            </div>
+            <div class="tw">
+                <a href="http://twitter.com" target="_blank" class="sociallink"><i class="icon-twitter"></i></a>
+            </div>
+            <div class="gplus">
+                <a href="http://plus.google.com" target="_blank" class="sociallink"><i class="icon-gplus"></i></a>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div id="footer">
+        &copy; 2017 Footer<a href="#logo">asd</a>
+    </div>
 </div>
 </body>
 </html>

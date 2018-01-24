@@ -9,9 +9,12 @@
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
+    <link rel="stylesheet" th:href="@{/css/fontello.css}"
+          href="../../css/fontello.css"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-login">
@@ -31,7 +34,8 @@
         </div>
     </div>
 </div>
-<!--<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>-->
+
+<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 
 </body>
 </html>
