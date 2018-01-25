@@ -21,15 +21,17 @@ public class UserService {
     private UserRepository userRepository;
 
     public void saveUser(User newUser) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        newUser.setUsername(newUser.getUsername());
-        newUser.setEnabled(true);
-        newUser.setAccountNonExpired(true);
-        newUser.setAccountNonLocked(true);
-        newUser.setCredentialsNonExpired(true);
-        newUser.addRole(RoleEnum.USER.name());
-        userRepository.save(newUser);
+        if(userRepository.findByUsername(newUser.getUsername()) == null){
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            newUser.setUsername(newUser.getUsername());
+            newUser.setEnabled(true);
+            newUser.setAccountNonExpired(true);
+            newUser.setAccountNonLocked(true);
+            newUser.setCredentialsNonExpired(true);
+            newUser.addRole(RoleEnum.USER.name());
+            userRepository.save(newUser);
+        }
     }
 
     public User findUserByUsername(String username) {

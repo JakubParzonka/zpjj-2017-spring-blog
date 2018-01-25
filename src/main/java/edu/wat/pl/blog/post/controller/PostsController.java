@@ -115,7 +115,6 @@ public class PostsController {
         Post post = postService.findPostById(id);
         if (post.getComments() == null || post.getComments().isEmpty()) {
             post.setComments(new ArrayList<>());
-            post.getComments().add(new Comment("", "", ""));
         }
         model.addAttribute("specificPost", post);
         model.addAttribute("comment", new Comment());
@@ -135,14 +134,14 @@ public class PostsController {
         commentService.updatePostWithComment(post, comment);
         return "redirect:/post/" + post.getId();
     }
-    @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
+
+
+    @RequestMapping(value = "/ajax/deleteComment", method = RequestMethod.POST)
     public String deleteComment(Comment comment, HttpSession session) {
         Post post = (Post) session.getAttribute("post");
-        logger.info("Post with a comment has been captured.");
-        commentService.updatePostWithComment(post, comment);
+        commentService.deleteComment(post, comment);
         return "redirect:/post/" + post.getId();
     }
-
 
 
     private boolean getFavPostStatus(Post post) {

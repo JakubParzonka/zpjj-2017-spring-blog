@@ -1,6 +1,5 @@
 package edu.wat.pl.blog.post.service;
 
-import edu.wat.pl.blog.comment.Comment;
 import edu.wat.pl.blog.post.model.Post;
 import edu.wat.pl.blog.post.repository.PostRepository;
 import edu.wat.pl.blog.utils.TimeUtils;
@@ -20,7 +19,6 @@ public class PostService {
         if (newPost.getCreationDate() == null) newPost.setCreationDate(TimeUtils.getCurrentTime());
         if (newPost.getComments() == null || newPost.getComments().isEmpty()) {
             newPost.setComments(new ArrayList<>());
-            newPost.getComments().add(new Comment("", "", ""));
         }
         postRepository.save(newPost);
     }
