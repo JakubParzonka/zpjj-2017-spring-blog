@@ -17,7 +17,7 @@
             <li th:if="${isAdmin}"
                 th:classappend="${#httpServletRequest.getRequestURI() == '/add_post' ? 'active':''}"><a
                     th:href="@{/add_post}">New post</a></li>
-            <li th:if="${isAdmin}"
+            <li th:unless="${username} == 'anonymousUser'"
                 th:classappend="${#httpServletRequest.getRequestURI() == '/posts' ? 'active':''}"><a
                     th:href="@{/posts}"><span>See all Posts</span></a></li>
             <li th:unless="${username} == 'anonymousUser'"
@@ -32,7 +32,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" th:if="${username} != 'anonymousUser'">
-            <!--<li><a style="text-decoration: none; cursor: default;"><span th:text="'Logged as: ' + ${username}"></span></a></li>-->
+        <!--<li><a><span th:text="'Zalogowany: ' + ${username}"></span></a></li>-->
+
+            <li><a style="text-decoration: none; cursor: default;"><span th:text="'Logged as: ' + ${username}"></span></a></li>
             <li style="padding-right: 10px;"><a href="/logout">Sign Out</a></li>
         </ul>
 </nav>
