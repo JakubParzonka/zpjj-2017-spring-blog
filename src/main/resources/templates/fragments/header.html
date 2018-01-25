@@ -32,8 +32,6 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" th:if="${username} != 'anonymousUser'">
-        <!--<li><a><span th:text="'Zalogowany: ' + ${username}"></span></a></li>-->
-
             <li><a style="text-decoration: none; cursor: default;"><span th:text="'Logged as: ' + ${username}"></span></a></li>
             <li style="padding-right: 10px;"><a href="/logout">Sign Out</a></li>
         </ul>
