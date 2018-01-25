@@ -34,6 +34,12 @@ public class UserService {
         }
     }
 
+    public void saveUserForFav(User userToUpdate){
+        userRepository.save(userToUpdate);
+    }
+
+
+
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }

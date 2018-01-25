@@ -121,8 +121,10 @@ public class PostsController {
         model.addAttribute("numberOfComments", post.getComments() != null ? post.getComments().size() : 0);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("isAdmin", userService.isCurrentUserAnAdmin(auth));
-        model.addAttribute("isInFav", getFavPostStatus(post));
-        model.addAttribute("username", ((auth == null) ? "unknown" : auth.getName()));
+        String username = ((auth == null) ? "unknown" : auth.getName());
+        model.addAttribute("username", username);
+        model.addAttribute("showFavButton", !getFavPostStatus(post) && username != "anonymousUser");
+        model.addAttribute("hideFavButton", getFavPostStatus(post) && username != "anonymousUser");
         session.setAttribute("post", post);
         return "post";
     }

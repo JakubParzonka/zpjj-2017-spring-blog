@@ -42,7 +42,7 @@ public class FavoriteService {
         Set<Favorite> favPost = user.getFavorites();
         Favorite fav = favPost.stream().filter(favorite -> Objects.equals(favorite.getPostId(), postId)).findFirst().get();
         user.getFavorites().remove(fav);
-        userService.saveUser(user);
+        userService.saveUserForFav(user);
     }
 
     public void addPostToFavorities(User user, String postId) {
@@ -55,6 +55,6 @@ public class FavoriteService {
                 user.getFavorites().add(new Favorite(postId));
         }
         System.out.println("Post " + postId + " added to " + user.getUsername() + " favorites list");
-        userService.saveUser(user);
+        userService.saveUserForFav(user);
     }
 }
