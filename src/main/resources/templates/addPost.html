@@ -46,10 +46,9 @@
 
     var save = function () {
         console.log("saving post using ajax");
-
         var title = $("#title").val();
         var contents = $("#summernote").summernote('code');
-        if (title === '' && contents === '') {
+        if (title === '' || contents === '') {
             alert("Title and content can not be empty!")
         } else {
             console.log("Correct data input");
