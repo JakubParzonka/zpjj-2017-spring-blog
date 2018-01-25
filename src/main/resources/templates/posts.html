@@ -14,15 +14,16 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-
-<div id="postContainer" th:unless="${posts == null}">
-    <div class="well" th:each="post : ${posts}">
-            <h2><a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a></h2>
-        <h4 th:text="${post.creationDate}"></h4>
-        <hr/>
-        <a class="btn btn-primary" th:if="${isAdmin and !isInFav}" th:href="@{/editPost/{id}(id=${post.id})}">Edit</a>
-        <a class="btn btn-danger" th:if="${isAdmin and !isInFav}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
-        <a class="btn btn-danger" th:if="${isInFav}" th:href="@{/removeFromFav/{id}(id=${post.id})}">Remove from favorites</a>
+<div class="container">
+    <div id="postContainer" th:unless="${posts == null}">
+        <div class="well" th:each="post : ${posts}">
+                <h2><a id="title" th:href="@{/post/{path}(path=${post.id})}" th:text="${post.title}"></a></h2>
+            <h4 th:text="${post.creationDate}"></h4>
+            <hr/>
+            <a class="btn btn-primary" th:if="${isAdmin and !isInFav}" th:href="@{/editPost/{id}(id=${post.id})}">Edit</a>
+            <a class="btn btn-danger" th:if="${isAdmin and !isInFav}" th:href="@{/deletePost/{id}(id=${post.id})}">Delete</a>
+            <a class="btn btn-danger" th:if="${isInFav}" th:href="@{/removeFromFav/{id}(id=${post.id})}">Remove from favorites</a>
+        </div>
     </div>
 </div>
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
