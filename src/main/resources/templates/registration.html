@@ -14,37 +14,37 @@
 <body>
 
 <div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+                <form th:cellpadding="10px" action="#" method="POST" th:action="@{/registration}" th:object="${user}"
+                      id="registrationForm">
 
-<div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-login">
-            <form th:cellpadding="10px" action="#" method="POST" th:action="@{/registration}" th:object="${user}"
-                  id="registrationForm">
+                    <h2 class="form-signin-heading">Create your account</h2>
 
-                <h2 class="form-signin-heading">Create your account</h2>
+                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                       <input type="text" th:id="username" th:field="*{username}" placeholder="Username" class="form-control"/>
+                    </div>
 
-                <div class="form-group ${error != null ? 'has-error' : ''}">
-                   <input type="text" th:id="username" th:field="*{username}" placeholder="Username" class="form-control"/>
-                </div>
+                    <!--<div class="form-group ${error != null ? 'has-error' : ''}">-->
+                        <!--<input type="text" th:id="email" th:field="*{email}" placeholder="Email Address" class="form-control"/>-->
+                    <!--</div>-->
 
-                <!--<div class="form-group ${error != null ? 'has-error' : ''}">-->
-                    <!--<input type="text" th:id="email" th:field="*{email}" placeholder="Email Address" class="form-control"/>-->
-                <!--</div>-->
+                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                       <input type="password" th:id="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+                    </div>
 
-                <div class="form-group ${error != null ? 'has-error' : ''}">
-                   <input type="password" th:id="password" th:field="*{password}" placeholder="Password" class="form-control"/>
-                </div>
+                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                        <input type="password" path="passwordConfirm" class="form-control"
+                               placeholder="Confirm your password"/>
+                    </div>
 
-                <div class="form-group ${error != null ? 'has-error' : ''}">
-                    <input type="password" path="passwordConfirm" class="form-control"
-                           placeholder="Confirm your password"/>
-                </div>
+                    <button class="btn btn-lg btn-primary center-block custom-width" type="submit">Sign up</button>
 
-                <button class="btn btn-lg btn-primary center-block custom-width" type="submit">Sign up</button>
-
-            </form>
+                </form>
+        </div>
     </div>
 </div>
-
-<!--<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>-->
+<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </body>
 </html>
