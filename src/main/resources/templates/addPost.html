@@ -39,6 +39,7 @@
 <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 
 <script>
+    // <![CDATA[
     $(document).ready(function () {
         $('#summernote').summernote();
     });
@@ -48,7 +49,7 @@
 
         var title = $("#title").val();
         var contents = $("#summernote").summernote('code');
-        if (title === '' || contents === '') {
+        if (title === '' && contents === '') {
             alert("Title and content can not be empty!")
         } else {
             console.log("Correct data input");
@@ -76,6 +77,7 @@
         }
 
     };
+    // ]]>
 </script>
 </body>
 </html>

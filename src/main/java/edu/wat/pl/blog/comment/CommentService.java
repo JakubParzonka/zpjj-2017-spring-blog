@@ -18,7 +18,12 @@ public class CommentService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         comment.setUsername((auth == null) ? "unknown" : auth.getName());
         comment.setCommentsDate(TimeUtils.getCurrentTime());
+        comment.setOwnerPostId(postToUpdate.getId());
+        comment.setcommentId(postToUpdate.getId() + "$" + (postToUpdate.getComments().size()+1));
         postToUpdate.getComments().add(comment);
         postService.savePost(postToUpdate);
+    }
+
+    public void deleteComment(Post post, Comment comment) {
     }
 }
